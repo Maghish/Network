@@ -1,0 +1,41 @@
+{% extends "network/layout.html" %}
+{% load static %}
+
+
+{% block body %}
+    {% if user.is_authenticated %}
+        <div id="new-post-div" class="card" style="width: 800px;">
+            <div class="card-body">
+                <h4 id="new-post-title">New Post</h4>
+                <form action="{% url 'new_post' %}" id="new-post-view" method="post">
+                    {% csrf_token %}
+                    <textarea class="form-control" id="new-post-body" placeholder="Share what's in your mind! " type="text" name="body"></textarea> 
+                    <input type="submit" class="btn btn-primary">
+                </form>
+            </div>
+        </div>
+
+        <div id="profile-div"></div>
+
+    <hr>
+    {% endif %}
+    
+    <h2 id="all-posts-div-title" style="text-align: center;">All Posts</h2>
+
+    <div id="all-posts-div">
+    </div>
+
+
+    <div id="pagination-btn-div">
+        <button id="previous-btn">Previous</button> 
+        <button id="next-btn">Next</button>
+    </div>
+    
+
+    <p id="currentPage" style="display: none;"></p>
+    
+{% endblock %}
+
+{% block script %}
+    <script src="{% static 'network/index.js' %}"></script>
+{% endblock %}
